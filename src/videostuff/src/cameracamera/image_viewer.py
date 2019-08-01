@@ -60,7 +60,7 @@ def compute_grad(img, sigma=2.5, mode="valid"):
 
 def detect_gate(
     img, sigma=10, count_thresh=0.025, num_bins=35, neighborhood=2,
-    vote_thresh=1000, cutoff_left=200, cutoff_right=200, cutoff_top=100,
+    vote_thresh=1000, cutoff_left=0, cutoff_right=0, cutoff_top=100,
     cutoff_bot=100, downsample_factor=0.5,
 ):
     bot_bound = img.shape[0] if cutoff_bot == 0 else -cutoff_bot
