@@ -1,0 +1,24 @@
+<launch>
+  <node pkg="avt_vimba_camera" type="mono_camera_node" name="left" respawn="true">
+    <rosparam>
+      ip: 192.168.1.40
+      acquisition_rate: 12
+      pixel_format: "BGR8Packed"
+    </rosparam>
+  </node>
+
+  <node pkg="avt_vimba_camera" type="mono_camera_node" name="down" respawn="true">
+    <rosparam>
+      ip: 192.168.1.42
+      acquisition_rate: 12
+      pixel_format: "BGR8Packed"
+    </rosparam>
+  </node>
+
+  <node pkg="rosbag" type="record" name="record1" args="-o /home/duke/dev/robosub-ros/catkin_ws/src/videostuff/src/front_cam_bags/ /left/image_raw"/>
+
+  <node pkg="rosbag" type="record" name="record2" args="-o /home/duke/dev/robosub-ros/catkin_ws/src/videostuff/src/down_cam_bags/ /down/image_raw"/>
+
+  <node pkg="cameracamera" type="cameracamera.py" name="cameracamera"/>
+
+</launch> 

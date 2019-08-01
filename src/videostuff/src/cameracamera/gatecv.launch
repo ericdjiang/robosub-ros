@@ -1,0 +1,22 @@
+<launch>
+  <node pkg="avt_vimba_camera" type="mono_camera_node" name="left" respawn="true">
+    <rosparam>
+      ip: 192.168.1.40
+      acquisition_rate: 12
+      pixel_format: "BGR8Packed"
+    </rosparam>
+  </node>
+
+  <node pkg="avt_vimba_camera" type="mono_camera_node" name="down" respawn="true">
+    <rosparam>
+      ip: 192.168.1.42
+      acquisition_rate: 12
+      pixel_format: "BGR8Packed"
+    </rosparam>
+  </node>
+
+  <node pkg="cameracamera" type="cameracamera.py" name="cameracamera"/>
+
+  <node pkg="cameracamera" type="image_viewer.py" name="image_viewer"/>
+
+</launch> 
