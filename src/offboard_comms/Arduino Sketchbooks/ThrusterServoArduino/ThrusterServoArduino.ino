@@ -1,8 +1,9 @@
+#include "Adafruit_PWMServoDriver.h"
 #include "MultiplexedBasicESC.h"
 #include "MultiplexedServo.h"
-#include "Adafruit_PWMServoDriver.h"
 #include <ros.h>
-#include <offboard_comms/ThrusterServo.h>
+#include <offboard_comms/ThrusterSpeeds.h>
+#include <offboard_comms/ServoControl.h>
 
 Adafruit_PWMServoDriver pwm_multiplexer(0x40);
 
@@ -14,22 +15,27 @@ uint64_t last_cmd_ms;
 int8_t thruster_speeds[NUM_THRUSTERS];
 MultiplexedBasicESC *thrusters[NUM_THRUSTERS];
 
-void thruster_servo_callback(const offboard_comms::ThrusterServo ts_msg)
+void thruster_speeds_callback(const offboard_comms::ThrusterSpeeds &ts_msg)
 {
     //copy the contents of the speed message to the local array
-    memcpy(thruster_speeds, ts_msg.thruster_speeds, sizeof(thruster_speeds));
+    memcpy(thruster_speeds, ts_msg.speeds, sizeof(thruster_speeds));
     last_cmd_ms = millis();
 }
 
+void servo_control_callback(const offboard_comms::ServoControl &sc_msg)
+{
+}
+
 ros::NodeHandle nh;
-ros::Subscriber<offboard_comms::ThrusterServo> sub("offboard/thruster_servo", &thruster_servo_callback);
+ros::Subscriber<offboard_comms::ThrusterSpeeds> ts_sub("/offboard/thruster_speeds", &thruster_speeds_callback);
+ros::Subscriber<offboard_comms::ServoControl> sc_sub("/offboard/servo_control", &servo_control_callback);
 
 void setup()
 {
     nh.initNode();
-    nh.subscribe(sub);
+    nh.subscribe(ts_sub);
+    nh.subscribe(sc_sub);
     pwm_multiplexer.begin();
-    Serial.begin(9600);
 
     for (int i = 0; i < NUM_THRUSTERS; ++i)
     {

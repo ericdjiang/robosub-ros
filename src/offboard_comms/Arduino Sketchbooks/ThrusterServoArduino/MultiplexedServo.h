@@ -14,6 +14,7 @@ private:
 
 public:
   MultiplexedServo(Adafruit_PWMServoDriver *);
+  ~MultiplexedServo();
   void writeMicroseconds(int);
   void attach(int);
   void detach();

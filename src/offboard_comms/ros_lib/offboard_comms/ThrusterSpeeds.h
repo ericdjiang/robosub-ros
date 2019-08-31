@@ -1,5 +1,5 @@
-#ifndef _ROS_offboard_comms_ThrusterServo_h
-#define _ROS_offboard_comms_ThrusterServo_h
+#ifndef _ROS_offboard_comms_ThrusterSpeeds_h
+#define _ROS_offboard_comms_ThrusterSpeeds_h
 
 #include <stdint.h>
 #include <string.h>
@@ -10,16 +10,16 @@
 namespace offboard_comms
 {
 
-  class ThrusterServo : public ros::Msg
+  class ThrusterSpeeds : public ros::Msg
   {
     public:
       typedef std_msgs::Header _header_type;
       _header_type header;
-      int8_t thruster_speeds[8];
+      int8_t speeds[8];
 
-    ThrusterServo():
+    ThrusterSpeeds():
       header(),
-      thruster_speeds()
+      speeds()
     {
     }
 
@@ -31,10 +31,10 @@ namespace offboard_comms
       union {
         int8_t real;
         uint8_t base;
-      } u_thruster_speedsi;
-      u_thruster_speedsi.real = this->thruster_speeds[i];
-      *(outbuffer + offset + 0) = (u_thruster_speedsi.base >> (8 * 0)) & 0xFF;
-      offset += sizeof(this->thruster_speeds[i]);
+      } u_speedsi;
+      u_speedsi.real = this->speeds[i];
+      *(outbuffer + offset + 0) = (u_speedsi.base >> (8 * 0)) & 0xFF;
+      offset += sizeof(this->speeds[i]);
       }
       return offset;
     }
@@ -47,17 +47,17 @@ namespace offboard_comms
       union {
         int8_t real;
         uint8_t base;
-      } u_thruster_speedsi;
-      u_thruster_speedsi.base = 0;
-      u_thruster_speedsi.base |= ((uint8_t) (*(inbuffer + offset + 0))) << (8 * 0);
-      this->thruster_speeds[i] = u_thruster_speedsi.real;
-      offset += sizeof(this->thruster_speeds[i]);
+      } u_speedsi;
+      u_speedsi.base = 0;
+      u_speedsi.base |= ((uint8_t) (*(inbuffer + offset + 0))) << (8 * 0);
+      this->speeds[i] = u_speedsi.real;
+      offset += sizeof(this->speeds[i]);
       }
      return offset;
     }
 
-    const char * getType(){ return "offboard_comms/ThrusterServo"; };
-    const char * getMD5(){ return "4eb0e6fd4ae7e912e89fc1baecc22da4"; };
+    const char * getType(){ return "offboard_comms/ThrusterSpeeds"; };
+    const char * getMD5(){ return "162db394a586ad904b91af2ff77226fa"; };
 
   };
 

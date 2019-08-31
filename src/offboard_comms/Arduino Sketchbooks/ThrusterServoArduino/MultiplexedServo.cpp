@@ -8,6 +8,10 @@ MultiplexedServo::MultiplexedServo(Adafruit_PWMServoDriver *_multiplexer) : mult
   attached = false;
 }
 
+MultiplexedServo::~MultiplexedServo(){
+  detach();
+}
+
 void MultiplexedServo::writeMicroseconds(int secs)
 {
   if (attached)
