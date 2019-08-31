@@ -10,11 +10,13 @@ class MultiplexedServo
 private:
   int num;
   Adafruit_PWMServoDriver *multiplexer;
+  bool attached;
 
 public:
   MultiplexedServo(Adafruit_PWMServoDriver *);
   void writeMicroseconds(int);
   void attach(int);
+  void detach();
 };
 
 #endif
