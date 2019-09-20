@@ -21,5 +21,5 @@ rosrun rosserial_python serial_node.py /dev/ttyUSB0
 ```
 Now to test, start sending messages to the offboard device. For instance, to run all the thrusters at speed 0, you can use:
 ```
-rostopic pub -r 10 /offboard/thruster_servo offboard_comms/ThrusterSpeeds '{speeds: [0,0,0,0,0,0,0,0]}'
+rostopic pub -r 10 /offboard/thruster_speeds offboard_comms/ThrusterSpeeds '{speeds: [0,0,0,0,0,0,0,0]}'
 ```
