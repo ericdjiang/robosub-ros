@@ -15,8 +15,8 @@ private:
 public:
   MultiplexedBasicESC(Adafruit_PWMServoDriver *, int);
   ~MultiplexedBasicESC();
-  void initialise();
-  void run(int);
+  void initialise(bool);
+  void run(int, bool);
 };
 
 #endif
