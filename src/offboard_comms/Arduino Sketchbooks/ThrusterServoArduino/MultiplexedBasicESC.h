@@ -2,21 +2,14 @@
 #define BasicESC_h
 
 #include <Arduino.h>
-#include "Motor.h"
-#include "MultiplexedServo.h"
-#include <Servo.h>
+#include "MultiplexedObject.h"
+#include "Adafruit_PWMServoDriver.h"
 
-class MultiplexedBasicESC
-{
-private:
-  int num;
-  MultiplexedServo *servo;
-
+class MultiplexedBasicESC:public MultiplexedObject{
 public:
-  MultiplexedBasicESC(Adafruit_PWMServoDriver *, int);
-  ~MultiplexedBasicESC();
-  void initialise(bool);
-  void run(int, bool);
+    MultiplexedBasicESC(Adafruit_PWMServoDriver *, int);
+    void initialise();
+    void run(int);
 };
 
 #endif

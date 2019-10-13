@@ -1,45 +1,21 @@
 #include <Arduino.h>
 #include <Wire.h>
+#include "Adafruit_PWMServoDriver.h"
 #include "MultiplexedBasicESC.h"
-#include "MultiplexedServo.h"
+#include "MultiplexedObject.h"
 
-MultiplexedBasicESC::MultiplexedBasicESC(Adafruit_PWMServoDriver *_multiplexer, int _num) : num(_num)
-{
-  servo = new MultiplexedServo(_multiplexer);
+MultiplexedBasicESC::MultiplexedBasicESC(Adafruit_PWMServoDriver *_multiplexer,int _num):MultiplexedObject(_multiplexer){
+    num=_num;
 }
 
-MultiplexedBasicESC::~MultiplexedBasicESC()
-{
-  delete servo;
+void MultiplexedBasicESC::initialise(){
+    attach(num);
+    run(0);
 }
 
-void MultiplexedBasicESC::run(int power, bool thruster)
-{
-  if (thruster)
-  {
-    float pulse = map(power, -128, 128, 1100, 1900);
-    Serial.println(pulse);
-    servo->writeMicroseconds(pulse);
-  }
-  else
-  {
-    float pulse = map(power, 0, 180, 600, 3100);
-    Serial.println(pulse);
-    servo->writeMicroseconds(pulse);
-  }
-  
+void MultiplexedBasicESC::run(int power){
+    float pulse=map(power, -128, 128, 1100, 1900);
+    writeMicroseconds(pulse);
 }
 
-void MultiplexedBasicESC::initialise(bool thruster)
-{
-  servo->attach(num);
-  if (thruster)
-  {
-    run(0, true);
-  }
-  else
-  {
-    run(90, false);
-  }
-  
-}
+
