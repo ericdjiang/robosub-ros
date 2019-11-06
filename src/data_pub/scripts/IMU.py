@@ -61,6 +61,8 @@ def talker():
             mag_msg.magnetic_field.x = items[5]
             mag_msg.magnetic_field.y = items[6]
             mag_msg.magnetic_field.z = items[7]
+            
+            mag_pub_data.publish(mag_msg)
 
             #print("yaw:\t" + str(float(items[1])) + "\t\t pitch: \t" + str(float(items[2])) + "\t roll: \t" + str(float(items[3])))
             #time.sleep(0.5)
