@@ -39,7 +39,7 @@ class IMURawPublisher:
         self._serial_port = None
         self._serial = None
 
-    def run(self):
+    def run():
         rospy.init_node(self.NODE_NAME)
 
         self._serial_port = next(list_ports.grep(self.FTDI_STR)).device
