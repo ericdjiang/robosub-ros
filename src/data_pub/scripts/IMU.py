@@ -19,7 +19,7 @@ class IMURawPublisher:
     IMU_DEST_TOPIC_GYRO = 'sensors/imu/gyro'
     IMU_DEST_TOPIC_QUAT = 'sensors/imu/quat'
 
-    FTDI_STR = 'FT1WDDLC'
+    FTDI_STR = 'FT1WDFQ2'
     BAUDRATE = 115200
     NODE_NAME = 'imu_pub'
     LINE_DELIM = ','
