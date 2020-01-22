@@ -19,7 +19,7 @@ class IMURawPublisher:
     IMU_DEST_TOPIC_GYRO = 'sensors/imu/gyro'
     IMU_DEST_TOPIC_QUAT = 'sensors/imu/quat'
 
-    FTDI_STR = 'ttyUSB0'
+    FTDI_STR = 'FT1WDDLC'
     BAUDRATE = 115200
     NODE_NAME = 'imu_pub'
     LINE_DELIM = ','
@@ -44,8 +44,16 @@ class IMURawPublisher:
 #        ports = list_ports.comports()
 #        for i in ports:
 #	   print(i.name)
-        self._serial_port = next(list_ports.grep(self.FTDI_STR)).device
-        self._serial = serial.Serial(self._serial_port, self.BAUDRATE, timeout=None, write_timeout=None, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE)
+	#print(list_ports.comports())
+#	for port in list_ports.comports():
+#		print(port)
+#	my_port_name = list(list_ports.grep(self.FTDI_STR))[0][0]
+        #self._serial_port = next(list_ports.grep(self.FTDI_STR)).device
+	temp = next(list_ports.grep(self.FTDI_STR))
+	self._serial_port = temp.device
+	print(temp.serial_number)
+        print(self._serial_port)
+	self._serial = serial.Serial(self._serial_port, self.BAUDRATE, timeout=None, write_timeout=None, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE)
         
         while not rospy.is_shutdown():
 	    
