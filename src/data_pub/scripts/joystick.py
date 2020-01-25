@@ -6,10 +6,18 @@ import math
 import time
 import sys
 
-try:
-    while(1):
-        hold = xin.get_thumb_values(xin.get_state(0))
 
-except:
-    ser.close()
-    exit()
+class Joystick:
+    
+    NODE_NAME = '
+    
+    def __init__(self):
+        self._pub_imu = rospy.Publisher(self.IMU_DEST_TOPIC_QUAT, IMU, queue_size=50)
+        
+
+    
+if __name__ == '__main__':
+try:
+    IMURawPublisher().run()
+except rospy.ROSInterruptException:
+    pass
