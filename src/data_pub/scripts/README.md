@@ -15,3 +15,4 @@ Then install the needed package:
 ```
 sudo apt-get install xinput
 ```
+ 
