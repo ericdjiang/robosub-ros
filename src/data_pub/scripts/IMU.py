@@ -41,30 +41,12 @@ class IMURawPublisher:
 
     def run(self):
         rospy.init_node(self.NODE_NAME)
-#        ports = list_ports.comports()
-#        for i in ports:
-#	   print(i.name)
-	#print(list_ports.comports())
-#	for port in list_ports.comports():
-#		print(port)
-#	my_port_name = list(list_ports.grep(self.FTDI_STR))[0][0]
-        #self._serial_port = next(list_ports.grep(self.FTDI_STR)).device
-	temp = next(list_ports.grep(self.FTDI_STR))
-	self._serial_port = temp.device
-	print(temp.serial_number)
-        print(self._serial_port)
+        self._serial_port = next(list_ports.grep(self.FTDI_STR)).device
 	self._serial = serial.Serial(self._serial_port, self.BAUDRATE, timeout=None, write_timeout=None, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE)
         
         while not rospy.is_shutdown():
-	    
-            #while(1):
-	    #    line = self._serial.read_until()
-	#	print(line)
-	   # for i in range(1):
-	#	line = self._serial.read_until()
 	    line = self._serial.read_until()	
-           # rospy.loginfo(line)
-            #self._pub_imu.header.stamp = rospy.Time.now()
+            self._pub_imu.header.stamp = rospy.Time.now()
             items = self._extract_line(line)  # array of line
 	    if items[0] == "$VNQMR":
 	        rospy.loginfo(line)
