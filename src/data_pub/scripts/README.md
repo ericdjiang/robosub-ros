@@ -1,4 +1,5 @@
-## Installing the XInput Package
+## Joystick Documentation
+### Installing the XInput Package
 
 First, install the package needed for detecting xinput on Linux:
 
