@@ -9,7 +9,8 @@ import sys
 
 class Joystick:
     
-    NODE_NAME = '
+    NODE_NAME = 'joy_pub'
+    LISTENING_TOPIC = '
     
     def __init__(self):
         self._pub_imu = rospy.Publisher(self.IMU_DEST_TOPIC_QUAT, IMU, queue_size=50)
