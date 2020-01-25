@@ -1,6 +1,6 @@
 # IMU Documentation
 
-Publishes an `sensor_msgs/IMU` message to the `IMU_DEST_TOPIC_QUAT` topic with
+Publishes an `sensor_msgs/IMU` message to the `IMU_DEST_TOPIC_QUAT` topic that contains information about
 - orientation (using quaternions)
 - angular velocity
 - linear acceleration 
