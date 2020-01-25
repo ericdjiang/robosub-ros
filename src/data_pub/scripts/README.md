@@ -67,3 +67,8 @@ where `kinetic` should be the version of `ros` that you are using (in this case,
 ```
 source devel/setup.bash
 ```
+
+The IMU code is in the directory:
+```
+~/dev/robosub-ros/catkin_ws/src/data_pub/scripts/
+```
