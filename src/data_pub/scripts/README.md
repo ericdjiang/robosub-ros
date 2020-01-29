@@ -69,7 +69,7 @@ Then navigate to the directory:
 ~/dev/robosub-ros/catkin_ws
 ```
 
-Here, run this command to build the workspace:
+At this directory, run this command to build the workspace:
 ```
 catkin build
 ```
