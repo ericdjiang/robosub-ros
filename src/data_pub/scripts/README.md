@@ -6,7 +6,7 @@ Publishes an `sensor_msgs/IMU` message to the `IMU_DEST_TOPIC_QUAT` topic that c
 - linear acceleration 
 
 
-Also publishes a `sensor_msgs/MagneticField` message with magnetometer measurements to the `IMU_DEST_TOPIC_MAG` topic.
+and publishes a `sensor_msgs/MagneticField` message with magnetometer measurements to the `IMU_DEST_TOPIC_MAG` topic.
 
 Locates the serial name of the IMU and reads its input as a string: 
 
