@@ -19,7 +19,7 @@ This is parsed into its individual components to be published as parts of the `I
 
 ## Physical Devices
 
-In the transition to the new computer for the robot, certain physical devices need to be checked before running code.
+In the transition from the old computer (`NUC`) to the new computer (`Jetson`), certain physical devices need to be checked before running code.
 
 First you want to make sure that both the IMU and (ADAPTER) are plugged into the robot *before* booting it up.
 
