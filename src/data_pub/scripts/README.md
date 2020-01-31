@@ -113,7 +113,7 @@ In this case we want to run the `data_pub` package's file `IMU.py`:
 rosrun data_pub IMU.py
 ```
 
-Older versions of the code should print the following message format printed in the terminal very quickly:
+Older versions of the code should print the following message format in the terminal very quickly:
 ```
 $VNQMR,±0.XXXXXX,±0.XXXXXX,±0.XXXXXX,±0.XXXXXX,±X.XXXX,±X.XXXX,±X.XXXX,±XX.XXX,±XX.XXX,±XX.XXX,±0.XXXXXX,±0.XXXXXX,±0.XXXXXX*YY
 ```
