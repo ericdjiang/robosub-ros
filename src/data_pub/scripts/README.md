@@ -113,13 +113,44 @@ In this case we want to run the `data_pub` package's file `IMU.py`:
 rosrun data_pub IMU.py
 ```
 
-You should see the following message format printed in the terminal very quickly:
+Older versions of the code should print the following message format printed in the terminal very quickly:
 ```
 $VNQMR,±0.XXXXXX,±0.XXXXXX,±0.XXXXXX,±0.XXXXXX,±X.XXXX,±X.XXXX,±X.XXXX,±XX.XXX,±XX.XXX,±XX.XXX,±0.XXXXXX,±0.XXXXXX,±0.XXXXXX*YY
 ```
+
+Otherwise, to see the information being published to the topic, you need to open a listener.
 
 To listen to this topic, run the following code in a *separate terminal* while the first terminal is still running the `IMU.py` code:
 ```
 rostopic echo IMU_DEST_TOPIC_QUAT
 ```
 
+You should see data being printed out in the following format in this new terminal:
+
+```
+header:
+ seq: ####
+ stamp:
+   secs:####
+   nsecs: #########
+  frame_id: "STRING"
+ orientation:
+  x: X.X
+  y: X.X
+  z: X.X
+  w: X.X
+  orientation_covariance: [-1.0, 0, 0, 0, 0, 0, 0, 0, 0]
+ angular_velocity:
+  x: X.X
+  y: X.X
+  z: X.X
+  w: X.X
+ angular_velocity_covariance: [-1.0, 0, 0, 0, 0, 0, 0, 0, 0]
+ linear_acceleration:
+  x: X.XXXXXXXXXX
+  y: X.XXXXXXXXXX
+  z: X.XXXXXXXXXX
+ linear_acceleration_covariance: [-1.0, 0, 0, 0, 0, 0, 0, 0, 0]
+ ```
+ 
+ To stop this listener and regain control, input the break command: `CTRL+C`
