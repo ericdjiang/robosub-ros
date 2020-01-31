@@ -35,7 +35,7 @@ If you are installing for `python2.7`:
 python2.7 -m pip install <PACKAGE NAME>
 ```
 
-If you are installing for `python3`
+If you are installing for `python3`:
 ```
 python3 -m pip install <PACKAGE NAME>
 ```
