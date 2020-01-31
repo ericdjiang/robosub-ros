@@ -28,6 +28,18 @@ Then you need to have the `pyserial` python library installed on the computer.
 pip install pyserial
 ```
 
+Make sure that the correct version of the library is installed.  The robot should be compatible with `python2` and `python3`, but make sure with others which version should be installed.
+
+If you are installing for `python2.7`:
+```
+python2.7 -m pip install <PACKAGE NAME>
+```
+
+If you are installing for `python3`
+```
+python3 -m pip install <PACKAGE NAME>
+```
+
 When `pyserial` is installed as well as the devices both plugged in correctly, the following command should list 2 external USB devices:
 ```
 python -m serial.tools.list_ports -v
