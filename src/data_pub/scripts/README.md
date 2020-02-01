@@ -81,19 +81,19 @@ Then navigate to the directory:
 ~/dev/robosub-ros/catkin_ws
 ```
 
-At this directory, run this command to build the workspace:
+At this directory, first source the file needed to setup the workspace:
+```
+source /opt/ros/kinetic/setup.bash
+```
+where `kinetic` should be the version of `ros` that you are using (in this case, it should be `kinetic`).  This should allow the following command to function properly
+
+Next, run this command to build the workspace:
 ```
 catkin build
 ```
 This will create some files (if the docker container was not already running), one of which will be the directory `devel/`.
 
-Then you will source the files needed to run scripts:
-
-```
-source /opt/ros/kinetic/setup.bash
-```
-where `kinetic` should be the version of `ros` that you are using (in this case, it should be `kinetic`)
-
+Now source the `devel` folder to be able to run packages:
 ```
 source devel/setup.bash
 ```
