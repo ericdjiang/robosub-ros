@@ -1,0 +1,14 @@
+bin/*
+build/*
+lib/*
+data/*
+doc/*
+etc/*
+launch/*
+keyframes/*
+loop_closures/*
+pointclouds/*
+graph_vertices.txt
+graph_edges.txt
+odom.txt
+test/*
