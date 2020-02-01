@@ -28,8 +28,35 @@ from gui_main import *
 import Tkinter as tk	# Native Python GUI Framework
 import time
 
+import rospy
+import numpy as np
+import XInput as xin
+import math
+import time
+import sys
+
+from geometry_msgs.msg import Twist
+
 class ParserMain(threading.Thread):
+	
+	NODE_NAME = 'joy_pub'
+	JOY_DEST_TOPIC_LOCAL = 'controls/desired_twist_local'
+	JOY_DEST_TOPIC_GLOBAL = 'controls/desired_twist_global'
+
 	def __init__(self):
+		
+		self._pub_joy_local = rospy.Publisher(self.JOY_DEST_TOPIC_LOCAL, Twist, queue_size=50)
+        self._pub_joy_global = rospy.Publisher(self.JOY_DEST_TOPIC_GLOBAL, Twist, queue_size=50)
+        
+        self._current_joy_local_msg = Twist()
+        self._current_jot_global_msg = Twist()
+		
+		self._movement_type = 0		# Where 0 defines the left joystick to translational movement (x, y)
+									#   and 1 defines the left joystick to rotation (roll, pitch)
+			
+		self._global_state = 0		# Where 0 is local movement
+									#   and 1 is global movement
+		
 		# Create bus object
 		self.bus = Bus()
 		# Create a dictionary to be used to keep states from joy_core
@@ -54,20 +81,77 @@ class ParserMain(threading.Thread):
 		self.parsercore.start()
 	
 	def run(self):
-		# Description: Polls the gamepad states and displays their current
-		#			   values on a simple Tkinter GUI
 		
-		# Launch simple GUI with Tkinter (Native GUI on Python)
-		try:
-                    while(1):
-                        print(self.states['LJ/Left'])
-                    while(0):
-                        for i, (k, v) in enumerate(self.states.items()):
-                            print("{}".format(v))
-		except AttributeError as ex: # If mainloop is broken then sys.quit
-			print "Found AttributeError, closing debugger"
-			# Now Exit
+		rospy.init_node(self.NODE_NAME)
+		
+	   	while(1):
+			leftLR = self.states['LJ/Left' + 'LJ/Right']
+			leftUD = self.states['LJ/Up' + 'LJ/Down']
+			rightLR = self.states['RJ/Left' + 'RJ/Right']
+			rightUD = self.states['RJ/Up' + 'RJ/Down']
 
+			if (self.states['X'] == 1):
+				self._movement_type = 0
+
+			if (self.states['Y'] == 1):
+				self._movement_type = 1
+				
+			if (self.states['A'] == 1):
+				self._global_state = 0
+				
+			if (self.states['B'] == 1):
+				self._global_state = 1
+				
+			if (self._global_state == 0):
+				if (self._movement_type == 0): 
+					self._current_joy_local_msg.linear.x = leftLR
+					self._current_joy_local_msg.linear.y = leftUD
+					self._current_joy_local_msg.linear.z = rightUD
+
+					self._current_joy_local_msg.angular.x = 0			
+					self._current_joy_local_msg.angular.y = 0			
+					self._current_joy_local_msg.angular.z = rightLR
+
+				else:
+					self._current_joy_local_msg.linear.x = 0			
+					self._current_joy_local_msg.linear.y = 0
+					self._current_joy_local_msg.linear.z = rightUD
+
+					self._current_joy_local_msg.angular.x = leftLR
+					self._current_joy_local_msg.angular.y = leftUD				
+					self._current_joy_local_msg.angular.z = rightLR
+			
+			if (self._global_state == 1):
+				if (self._movement_type == 0): 
+					self._current_joy_global_msg.linear.x = leftLR
+					self._current_joy_global_msg.linear.y = leftUD
+					self._current_joy_global_msg.linear.z = rightUD
+
+					self._current_joy_global_msg.angular.x = 0			
+					self._current_joy_global_msg.angular.y = 0			
+					self._current_joy_global_msg.angular.z = rightLR
+
+				else:
+					self._current_joy_global_msg.linear.x = 0			
+					self._current_joy_global_msg.linear.y = 0
+					self._current_joy_global_msg.linear.z = rightUD
+
+					self._current_joy_global_msg.angular.x = leftLR
+					self._current_joy_global_msg.angular.y = leftUD				
+					self._current_joy_global_msg.angular.z = rightLR
+					
+			self._pub_joy_local.publish(self._current_joy_local_msg)
+			self._current_joy_local_msg = Twist()
+			self._pub_joy_global.publish(self._current_joy_global_msg)
+			self._current_joy_global_msg = Twist()
+				
+			
+				
+
+		
 if __name__ == '__main__':
-        parser = ParserMain()
-        parser.run()
+	try:
+        	parser = ParserMain()
+        	parser.run()
+	except rospy.ROSInterruptException:
+        	pass
