@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 ############ Logitech F310 Gamepad Controller Main - parser_main.py ##########
 # Original Author: John Zeller
 # Description: Parser_Main polls the data in a python dictionary to check the
@@ -20,7 +21,7 @@
 ###############################################################################
 
 import sys
-sys.path.append("./core")
+sys.path.append("/home/duke/dev/robosub-ros/catkin_ws/src/data_pub/scripts/F310/core")
 import threading
 from bus import *
 from parser_core import *
@@ -30,10 +31,7 @@ import time
 
 import rospy
 import numpy as np
-import XInput as xin
 import math
-import time
-import sys
 
 from geometry_msgs.msg import Twist
 
@@ -46,10 +44,10 @@ class ParserMain(threading.Thread):
 	def __init__(self):
 		
 		self._pub_joy_local = rospy.Publisher(self.JOY_DEST_TOPIC_LOCAL, Twist, queue_size=50)
-        self._pub_joy_global = rospy.Publisher(self.JOY_DEST_TOPIC_GLOBAL, Twist, queue_size=50)
+        	self._pub_joy_global = rospy.Publisher(self.JOY_DEST_TOPIC_GLOBAL, Twist, queue_size=50)
         
-        self._current_joy_local_msg = Twist()
-        self._current_jot_global_msg = Twist()
+        	self._current_joy_local_msg = Twist()
+        	self._current_joy_global_msg = Twist()
 		
 		self._movement_type = 0		# Where 0 defines the left joystick to translational movement (x, y)
 									#   and 1 defines the left joystick to rotation (roll, pitch)
@@ -85,10 +83,10 @@ class ParserMain(threading.Thread):
 		rospy.init_node(self.NODE_NAME)
 		
 	   	while(1):
-			leftLR = self.states['LJ/Left' + 'LJ/Right']
-			leftUD = self.states['LJ/Up' + 'LJ/Down']
-			rightLR = self.states['RJ/Left' + 'RJ/Right']
-			rightUD = self.states['RJ/Up' + 'RJ/Down']
+			leftLR = self.states['LJ/Left'] + self.states['LJ/Right']
+			leftUD = self.states['LJ/Up'] + self.states['LJ/Down']
+			rightLR = self.states['RJ/Left'] + self.states['RJ/Right']
+			rightUD = self.states['RJ/Up'] + self.states['RJ/Down']
 
 			if (self.states['X'] == 1):
 				self._movement_type = 0
@@ -139,7 +137,8 @@ class ParserMain(threading.Thread):
 					self._current_joy_global_msg.angular.x = leftLR
 					self._current_joy_global_msg.angular.y = leftUD				
 					self._current_joy_global_msg.angular.z = rightLR
-					
+				
+#			rospy.loginfo(leftLR)
 			self._pub_joy_local.publish(self._current_joy_local_msg)
 			self._current_joy_local_msg = Twist()
 			self._pub_joy_global.publish(self._current_joy_global_msg)
