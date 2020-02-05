@@ -1,7 +1,7 @@
 #include "Adafruit_PWMServoDriver.h"
 #include "MultiplexedBasicESC.h"
 #include "MultiplexedServo.h"
-/#include <ros.h>#include <offboard_comms/ThrusterSpeeds.h>
+#include <ros.h>#include <offboard_comms/ThrusterSpeeds.h>
 #include <std_msgs/Int8MultiArray.h>
 #include <offboard_comms/ServoControl.h>
 #include <Arduino.h>
