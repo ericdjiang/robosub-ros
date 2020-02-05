@@ -1,8 +1,8 @@
 #include "Adafruit_PWMServoDriver.h"
 #include "MultiplexedBasicESC.h"
 #include "MultiplexedServo.h"
-#include <ros.h>
-#include <offboard_comms/ThrusterSpeeds.h>
+/#include <ros.h>#include <offboard_comms/ThrusterSpeeds.h>
+#include <std_msgs/Int8MultiArray.h>
 #include <offboard_comms/ServoControl.h>
 #include <Arduino.h>
 
@@ -21,7 +21,7 @@ MultiplexedBasicESC *thrusters[NUM_THRUSTERS];
 MultiplexedServo *servos[NUM_SERVO];
 
 // reusing ESC library code
-void thruster_speeds_callback(const offboard_comms::ThrusterSpeeds &ts_msg){
+void thruster_speeds_callback(const std_msgs::Int8MultiArray &ts_msg){
     //copy the contents of the speed message to the local array
     memcpy(thruster_speeds, ts_msg.speeds, sizeof(thruster_speeds));
     last_cmd_ms_ts = millis();
@@ -33,7 +33,7 @@ void servo_control_callback(const offboard_comms::ServoControl &sc_msg){
 }
 
 ros::NodeHandle nh;
-ros::Subscriber<offboard_comms::ThrusterSpeeds> ts_sub("/offboard/thruster_speeds", &thruster_speeds_callback);
+ros::Subscriber<std_msgs::Int8MultiArray> ts_sub("/offboard/thruster_speeds", &thruster_speeds_callback);
 ros::Subscriber<offboard_comms::ServoControl> sc_sub("/offboard/servo_control", &servo_control_callback);
 
 void setup(){
