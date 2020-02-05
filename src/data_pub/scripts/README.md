@@ -127,7 +127,7 @@ rostopic echo sensors/imu/mag
 ```
 to listen to the `sensor_msgs/MagneticField` message.
 
-You should see data being printed out in the following format in this new terminal:
+You should see data being printed out in the following format for the `sensor_msgs/IMU` topic in this new terminal:
 
 ```
 header:
