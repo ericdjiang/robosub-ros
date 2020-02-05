@@ -1,12 +1,12 @@
 # IMU Documentation
 
-Publishes an `sensor_msgs/IMU` message to the `IMU_DEST_TOPIC_QUAT` topic that contains information about
+Publishes an `sensor_msgs/IMU` message to the `sensors/imu/quat` topic that contains information about
 - orientation (using quaternions)
 - angular velocity
 - linear acceleration 
 
 
-and publishes a `sensor_msgs/MagneticField` message with magnetometer measurements to the `IMU_DEST_TOPIC_MAG` topic.
+and publishes a `sensor_msgs/MagneticField` message with magnetometer measurements to the `sensors/imu/mag` topic.
 
 Locates the serial name of the IMU and reads its input as a string: 
 
@@ -119,8 +119,13 @@ Otherwise, to see the information being published to the topic, you need to open
 
 To listen to this topic, run the following code in a *separate terminal* while the first terminal is still running the `IMU.py` code:
 ```
-rostopic echo IMU_DEST_TOPIC_QUAT
+rostopic echo sensors/imu/quat
 ```
+to listen to the `sensor_msgs/IMU` message, and
+```
+rostopic echo sensors/imu/mag
+```
+to listen to the `sensor_msgs/MagneticField` message.
 
 You should see data being printed out in the following format in this new terminal:
 
