@@ -67,22 +67,22 @@ ssh -XY -p 2200 duke@192.168.1.1
 Password should be obtained from another member.
 
 ## Testing/Editing the Code
-Start with starting roscore:
+Start with sourcing `ros`:
+```
+source /opt/ros/kinetic/setup.bash
+```
+where `kinetic` should be the version of `ros` that you are using (in this case, it should be `kinetic`).  This should allow the command to function properly.
+
+Next start `roscore`:
 ```
 roscore&
 ```
-where the `&` is used to give user control while the `roscore` runs in the background.  If `roscore` is already running, it will give you an error saying this.  This is fine as long as `roscore` is running.
+where the `&` is used to give user control while the `roscore` runs in the background.  If `roscore` is already running, it will give you an error, but this is fine as long as `roscore` is running.
 
 Then navigate to the directory:
 ```
 ~/dev/robosub-ros/catkin_ws
 ```
-
-At this directory, first source the file needed to setup the workspace:
-```
-source /opt/ros/kinetic/setup.bash
-```
-where `kinetic` should be the version of `ros` that you are using (in this case, it should be `kinetic`).  This should allow the command to function properly.
 
 Next, run this command to build the workspace:
 ```
