@@ -35,10 +35,7 @@ If you are installing for `python2.7`:
 python2.7 -m pip install <PACKAGE NAME>
 ```
 
-If you are installing for `python3`:
-```
-python3 -m pip install <PACKAGE NAME>
-```
+The robot should be using `python 2`, so the `pip install pyserial` line above should install correctly for the correct version.
 
 When `pyserial` is installed as well as the devices both plugged in correctly, the following command should list 2 external USB devices:
 ```
@@ -85,7 +82,7 @@ At this directory, first source the file needed to setup the workspace:
 ```
 source /opt/ros/kinetic/setup.bash
 ```
-where `kinetic` should be the version of `ros` that you are using (in this case, it should be `kinetic`).  This should allow the following command to function properly
+where `kinetic` should be the version of `ros` that you are using (in this case, it should be `kinetic`).  This should allow the command to function properly.
 
 Next, run this command to build the workspace:
 ```
@@ -153,4 +150,4 @@ header:
  linear_acceleration_covariance: [-1.0, 0, 0, 0, 0, 0, 0, 0, 0]
  ```
  
- To stop this listener and regain control, input the break command: `CTRL+C`
+ To stop this listener and regain control, input the break command: `CTRL+C` or `CTRL+Z`
