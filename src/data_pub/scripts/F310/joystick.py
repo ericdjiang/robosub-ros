@@ -43,8 +43,8 @@ class ParserMain(threading.Thread):
 
 	def __init__(self):
 		
-		self._pub_joy_local = rospy.Publisher(self.JOY_DEST_TOPIC_LOCAL, Twist, queue_size=50)
-        	self._pub_joy_global = rospy.Publisher(self.JOY_DEST_TOPIC_GLOBAL, Twist, queue_size=50)
+		self._pub_joy_local = rospy.Publisher(self.JOY_DEST_TOPIC_LOCAL, Twist, queue_size=5)
+        	self._pub_joy_global = rospy.Publisher(self.JOY_DEST_TOPIC_GLOBAL, Twist, queue_size=5)
         
         	self._current_joy_local_msg = Twist()
         	self._current_joy_global_msg = Twist()
@@ -83,10 +83,10 @@ class ParserMain(threading.Thread):
 		rospy.init_node(self.NODE_NAME)
 		
 	   	while(1):
-			leftLR = self.states['LJ/Left'] + self.states['LJ/Right']
-			leftUD = self.states['LJ/Up'] + self.states['LJ/Down']
-			rightLR = self.states['RJ/Left'] + self.states['RJ/Right']
-			rightUD = self.states['RJ/Up'] + self.states['RJ/Down']
+			leftLR = (self.states['LJ/Left'] + self.states['LJ/Right']) / 128.0
+			leftUD = (self.states['LJ/Up'] + self.states['LJ/Down']) / 128.0
+			rightLR = (self.states['RJ/Left'] + self.states['RJ/Right']) / 128.0
+			rightUD = (self.states['RJ/Up'] + self.states['RJ/Down']) / 128.0
 
 			if (self.states['X'] == 1):
 				self._movement_type = 0
@@ -138,7 +138,7 @@ class ParserMain(threading.Thread):
 					self._current_joy_global_msg.angular.y = leftUD				
 					self._current_joy_global_msg.angular.z = rightLR
 				
-#			rospy.loginfo(leftLR)
+			rospy.loginfo(self._global_state)
 			self._pub_joy_local.publish(self._current_joy_local_msg)
 			self._current_joy_local_msg = Twist()
 			self._pub_joy_global.publish(self._current_joy_global_msg)
