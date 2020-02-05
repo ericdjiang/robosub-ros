@@ -56,17 +56,15 @@ class ParserMain(threading.Thread):
 	    if (self._global_state == 0):
 		if (self._movement_type == 0): 
                     self._parse_local_linear()
-
 	        else:
                     self._parse_local_angular()
 			
-             if (self._global_state == 1):
+            if (self._global_state == 1):
 	        if (self._movement_type == 0): 
                     self._parse_global_linear()
 	        else:
 		    self._parse_global_angular()
-
-            self._publish_current_msg()
+	    self._publish_current_msg()
 
     def _parse_local_linear(self):
 	self._current_joy_local_msg.linear.x = leftLR
