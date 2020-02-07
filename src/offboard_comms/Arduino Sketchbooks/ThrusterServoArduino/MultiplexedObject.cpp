@@ -27,7 +27,7 @@ void MultiplexedObject::detach(int _num){
 void MultiplexedObject::writeMicroseconds(int secs){
     if (attached)
     {
-        int mappedPulse = map(secs, 1100, 1900, 1142, 1972);
+        int mappedPulse = map(secs, 1100, 1900, 1000, 1720);
         multiplexer->setPin(num, mappedPulse, false);
     }
 }

@@ -17,5 +17,3 @@ void MultiplexedBasicESC::run(int power){
     float pulse=map(power, -128, 128, 1100, 1900);
     writeMicroseconds(pulse);
 }
-
-
