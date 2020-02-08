@@ -16,7 +16,7 @@ The buttons `A`, `B`, `X`, `Y`, change the joystick output.
  
  * `X` sets the joysticks to publish **lateral movement** (`X, Y`), (`Z, Yaw`) to the current topic
  
- * `Y` sets the joysticks to publish **rotation** (`Roll, Pitch`), (`Z, Yaw`) to the current topic
+ * `Y` sets the joysticks to publish **rotation** (`Pitch, Roll`), (`Z, Yaw`) to the current topic
  
 Where the joysticks input follows the form:
  
